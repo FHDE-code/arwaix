@@ -1,0 +1,205 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+}
+
+body {
+  background: #000;
+  /* Correction : L'animation doit être appliquée ici pour que 'inherit' fonctionne partout */
+  animation: colorCycle 20s linear infinite; 
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;   /* Scroll horizontal activé */
+  overflow-y: hidden; /* Bloque le scroll vertical global */
+  height: 100vh;
+  width: fit-content; /* S'adapte à la largeur des sections */
+}
+
+/* ================= ANIMATION COULEURS ================= */
+@keyframes colorCycle {
+  0%, 100% { color: #00f0ff; }
+  25%      { color: #ff0404; }
+  50%      { color: #03ff03; }
+  75%      { color: #48018a; }
+}
+
+/* ================= SECTIONS (Alignées) ================= */
+section {
+  display: flex; /* Changé de inline-flex à flex pour la stabilité */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Dimensions corrigées pour la visibilité */
+  flex: 0 0 60vw;       /* Chaque section prend 60% de la largeur vue */
+  height: 70vh;         /* Hauteur fixe pour éviter les disparitions */
+  margin: 15vh 5vw;     /* Centrage vertical et espace horizontal */
+  padding: 40px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 40px;
+  backdrop-filter: blur(12px);
+  border: 2px solid currentColor; /* Suit la couleur de l'animation */
+  box-shadow: 0 0 20px currentColor;
+
+  white-space: normal;  /* ✅ Correction : autorise le texte à revenir à la ligne */
+  overflow-y: auto;     /* ✅ Correction : permet de scroller à l'intérieur de la section */
+  color: inherit;       /* Reçoit la couleur du body */
+}
+
+/* ================= BOUTONS VISIBLES ================= */
+.button {
+  display: inline-block;
+  min-width: 220px;
+  padding: 15px 30px;
+  margin: 10px;
+  
+  color: inherit; 
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid currentColor;
+  border-radius: 50px;
+  
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px currentColor;
+  
+  /* Animation flottante */
+  animation: floatButton 3s ease-in-out infinite;
+}
+
+.button:hover {
+  background: currentColor;
+  color: #000;
+  transform: translateY(-5px);
+}
+
+/* ================= NAVIGATION ================= */
+nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  gap: 20px;
+  padding: 10px 30px;
+  border-radius: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid currentColor;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+/* ================= LOGO FLOTTANT ================= */
+.floating-icon {
+  position: fixed;
+  bottom: 20px; /* Changé de top 95% pour plus de sécurité */
+  left: 50px;
+  z-index: 1000;
+  pointer-events: none; /* Ne gêne pas le clic */
+}
+
+.floating-icon img {
+  width: 150px;
+  height: auto;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatButton {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ================= PARAMÈTRES HAUT GAUCHE ================= */
+.settings-top-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100; /* Au dessus de tout */
+  color: inherit;
+}
+
+.settings-trigger {
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  backdrop-filter: blur(5px);
+}
+
+.settings-content {
+  display: none; /* Caché par défaut */
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid currentColor;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.settings-top-left:hover .settings-content {
+  display: block; /* Affiche au survol */
+}
+
+.setting-item {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.setting-item select, .setting-item button {
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.setting-item button:hover {
+  background: currentColor;
+  color: #000;
+}
+
+/* ================= BARRE DE PROGRESSION ================= */
+#progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px; /* Très fine et élégante */
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 2000;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%; /* Sera piloté par le JS */
+  background: currentColor; /* Suit l'animation de couleur */
+  box-shadow: 0 0 15px currentColor;
+  transition: width 0.2s ease-out;
+}

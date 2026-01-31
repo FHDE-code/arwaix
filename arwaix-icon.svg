@@ -1,0 +1,30 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cercle extérieur néon -->
+  <circle cx="100" cy="100" r="90" stroke="#00f0ff" stroke-width="4" fill="none" />
+
+  <!-- Définition du chemin circulaire -->
+  <defs>
+    <path id="circlePath" d="M 100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" />
+  </defs>
+
+  <!-- Texte binaire autour du cercle -->
+  <text font-family="Courier New, monospace" font-size="14" fill="#00f0ff">
+    <textPath href="#circlePath" startOffset="0%">
+      010101010101010101010101010101010101010101010101010101010101010101010101010101
+      <animate attributeName="startOffset" from="0%" to="100%" dur="8s" repeatCount="indefinite"/>
+    </textPath>
+  </text>
+
+  <!-- Texte ARWAIX central qui tourne -->
+  <text x="100" y="105" text-anchor="middle" dominant-baseline="middle"
+        font-family="Courier New, monospace" font-size="28" fill="#00f0ff">
+    <animateTransform attributeName="transform"
+                      type="rotate"
+                      from="0 100 100"
+                      to="360 100 100"
+                      dur="10s"
+                      repeatCount="indefinite"/>
+    ARWAIX
+  </text>
+</svg>
+
