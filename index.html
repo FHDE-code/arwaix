@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noova Adventure - Jeu 3D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <div id="ui-overlay">
+            <div id="menu-screen" class="screen active">
+                <h1 class="game-title">NOOVA ADVENTURE</h1>
+                <p class="subtitle">Un aventure manga en 3D</p>
+                <button id="start-btn" class="btn primary">COMMENCER</button>
+                <div class="controls-info">
+                    <p><span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> Se déplacer</p>
+                    <p><span class="key">ESPACE</span> Sauter</p>
+                </div>
+            </div>
+            
+            <div id="game-screen" class="screen">
+                <div id="score-display">
+                    <span class="label">CRISTAUX:</span>
+                    <span id="score-value">0</span>
+                    <span class="total">/ <span id="total-crystals">5</span></span>
+                </div>
+                <div id="message-display"></div>
+            </div>
+            
+            <div id="win-screen" class="screen">
+                <h2 class="win-title">VICTOIRE!</h2>
+                <p class="win-message">Tu as收集 tous les cristaux!</p>
+                <button id="restart-btn" class="btn primary">REJOUER</button>
+            </div>
+        </div>
+        
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>Chargement...</p>
+        </div>
+    </div>
+    
+    <script src="three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
